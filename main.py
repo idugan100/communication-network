@@ -8,7 +8,9 @@ color_3 = 'yellow'
 G = nx.Graph()
 
 #create graph 1
-G.add_nodes_from([ 1, 2, 3, 4, 5, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28])
+for i in range (1,28): 
+	G.add_node(i,in_engaged=[False,False,False])
+
 G.add_edges_from([ 
 			(1,3, {'color':color_2}), (3,2,{'color':color_1}), (3,6,{'color':color_3}), 
 			(6,5,{'color':color_2}), (5,4,{'color':color_1}), (5,7,{'color':color_3}), 
@@ -23,8 +25,22 @@ G.add_edges_from([
 colors=[]
 for i,j,attributes in G.edges(data=True):
 	colors.append(attributes['color'])
-print(colors)
+
 print("Nodes: " +str(G.number_of_nodes()),"Edges:" + str(G.number_of_edges()))
+print("Highest Degree of Any Node:"  + str(len(nx.degree_histogram(G))-1))
+
+#logic for optimization algorithm
+#for i in the highest node degree
+	#for each node in G (must be sorted so highest degree nodes (remaining?) go first)
+		#if node is not engaged
+			#get all edges from the node that are not completed and do not go to an engaged node
+			#of these eligible edges select the one that goes to the node with the highest (remaining?) degree
+			# set the edge to be completed with the corresponding color
+			# set the node to be engaged
+		#else continue to next node interation
+	#clear all node engagements for next round	
 
 nx.draw_networkx(G, width=2, with_labels=True, font_weight='bold', node_color='skyblue', edge_color=colors, node_size=400, font_size=10)
+
 plt.show()
+
