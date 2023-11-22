@@ -19,8 +19,8 @@ G.add_edges_from([
 			(8,14,{'color':color_3}), (14,15,{'color':color_2}), (15,19,{'color':color_1}), 
 			(15,16,{'color':color_3}), (16,17,{'color':color_2}), (16,18,{'color':color_1}), 
 			(14,20,{'color':color_1}), (20,21,{'color':color_2}), (21,22,{'color':color_1}),
-			(21,23,{'color':'yellow'}), (20,24,{'color':'yellow'}), (24,25,{'color':'red'}),
-			(24,26,{'color':'blue'}), (26,27,{'color':'red'}), (26,28,{'color':'yellow'}) 
+			(21,23,{'color':color_3}), (20,24,{'color':color_3}), (24,25,{'color':color_1}),
+			(24,26,{'color':color_2}), (26,27,{'color':color_1}), (26,28,{'color':color_3}) 
 		])
 colors=[]
 for i,j,attributes in G.edges(data=True):
