@@ -39,7 +39,7 @@ print("Highest Degree of Any Node:"  + str(len(nx.degree_histogram(G))-1))
 			# set the node to be engaged
 		#else continue to next node interation
 	#clear all node engagements for next round	
-pos=nx.kamada_kawai_layout(G)
+pos = nx.spring_layout(G,k=.7)
 nx.draw_networkx(G, pos, width=2, with_labels=True, min_source_margin=2,font_weight='bold', node_color='skyblue', edge_color=colors, node_size=400, font_size=10)
 
 edge_labels = nx.get_edge_attributes(G, 'weight')
