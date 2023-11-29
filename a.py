@@ -12,8 +12,6 @@ def get_sorted_node_list_by_starting_degree(Graph):
 		for node in G.nodes():
 			if (G.nodes[node]["starting_degree"]==i):
 				nodes_by_degree.append(node)
-
-
 	return nodes_by_degree
 
 def get_sorted_node_list_by_remaining_degree(Graph):
@@ -58,32 +56,21 @@ color_list=['red','blue','yellow','green','orange','brown','pink']
 G = nx.Graph()
 
 #create graph 1
-for i in range (1,29): 
+for i in range (1,30): 
 	G.add_node(i,is_engaged=False)
 
 G.add_edges_from([ 
-			(1,3, {'color':color_2}), (3,2,{'color':color_1}), (3,6,{'color':color_3}), 
-			(6,5,{'color':color_2}), (5,4,{'color':color_1}), (5,7,{'color':color_3}), 
-			(6,8,{'color':color_1}), (11,10,{'color':color_2}), (12,10,{'color':color_1}), 
-			(10,9,{'color':color_3}), (9,13,{'color':color_1}), (9,8,{'color':color_2}), 
-			(8,14,{'color':color_3}), (14,15,{'color':color_2}), (15,19,{'color':color_1}), 
-			(15,16,{'color':color_3}), (16,17,{'color':color_2}), (16,18,{'color':color_1}), 
-			(14,20,{'color':color_1}), (20,21,{'color':color_2}), (21,22,{'color':color_1}),
-			(21,23,{'color':color_3}), (20,24,{'color':color_3}), (24,25,{'color':color_1}),
-			(24,26,{'color':color_1}), (26,27,{'color':color_2}), (26,28,{'color':color_3}),
-
-			#these are extra edges for testing the generality of my algorithm
-			(12,11,{'color':color_1}),(13,10,{'color':color_1}), (8,7,{'color':color_1}),
-			(8,20,{'color':color_1}),(21,8,{'color':color_1}), (16,24,{'color':color_1})
+			(1,3), (3,2), (3,6), (6,5), (5,4), (5,7), (6,8), (11,10), (12,10), (10,9), (9,13), (9,8), 
+			(8,14), (14,15), (15,19), (15,16), (16,17), (16,18), (14,20), (20,21), (21,22),
+			(21,23), (20,24), (24,25), (24,26), (26,27), (26,28), 
+			(9,20), (15,6),(14,25), (16,14) 
 		])
-colors=[]
 
 #add degree values of each node
 for node in G.nodes():
 	G.nodes[node]["starting_degree"] = G.degree(node)
 	G.nodes[node]["remaining_degree"] = G.degree(node)
 
-# print(get_sorted_node_list_by_starting_degree(G))
 
 for i,j,attributes in G.edges(data=True):
 	attributes["completed"]=False
@@ -108,10 +95,11 @@ for i in range(get_max_degree_of_graph(G)):
 
 	clear_node_engagements(G)	
 
+colors=[]
 for i,j,attributes in G.edges(data=True):
 	colors.append(attributes['color'])
 
 nx.draw_networkx(G, width=2, with_labels=True, font_weight='bold', node_color='skyblue', edge_color=colors, node_size=400, font_size=10)
-
+plt.savefig("a.png")
 plt.show()
 
