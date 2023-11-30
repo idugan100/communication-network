@@ -19,9 +19,32 @@ def get_sorted_node_list_by_remaining_degree_then_max_edge_weight(Graph):
 	graph_degree = get_max_degree_of_graph(Graph)
 
 	for i in range (graph_degree, -1, -1):
+		node_degree_class=[]
 		for node in G.nodes():
 			if(G.nodes[node]["remaining_degree"]==i):
-				nodes_by_degree.append(node)
+				node_degree_class.append(node)
+		for j in range(len(node_degree_class)):
+			all_edges_under_consideration=[]
+			#add all edges to list
+			all_edges_under_consideration=list(Graph.edges(node_degree_class))
+			#remove completed nodes
+			edges=all_edges_under_consideration.copy()
+			for (i, j) in edges:
+				if (Graph[i][j]["completed"]==True):
+					all_edges_under_consideration.remove( (i,j) )
+			#find the highest weight edge
+			max_i=-1
+			max_j=-1
+			max_weight=-1
+			for (i,j) in all_edges_under_consideration:
+				if(Graph[i][j]["weight"]>max_weight):
+					max_i=i
+					max_j=j 
+					max_weight=Graph[i][j]["weight"]
+			print(Graph[max_i][max_j])
+			exit(0)
+			#add the node it is from to the nodes_by_degree final results array
+			#remove added node from the nodes_degree_class so it's edge wont get picked again 
 	return nodes_by_degree	
 	
 def clear_node_engagements(Graph):
@@ -94,7 +117,7 @@ for i,j,attributes in G.edges(data=True):
 
 #logic for optimization algorithm
 for i in range(get_max_degree_of_graph(G)):
-	for node in get_sorted_node_list_by_remaining_degree(G):
+	for node in get_sorted_node_list_by_remaining_degree_then_max_edge_weight(G):
 		if(G.nodes[node]["is_engaged"]==False):
 			destination_node = get_node_to_transfer_with(G,node,i)
 			if(destination_node == -1):
