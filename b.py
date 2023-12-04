@@ -41,10 +41,17 @@ def get_sorted_node_list_by_remaining_degree_then_max_edge_weight(Graph):
 					max_i=i
 					max_j=j 
 					max_weight=Graph[i][j]["weight"]
-			print(Graph[max_i][max_j])
-			exit(0)
-			#add the node it is from to the nodes_by_degree final results array
+			# print(max_i,max_j,node_degree_class, all_edges_under_consideration)
+			# print("\n")
+			# add the node it is from to the nodes_by_degree final results array
 			#remove added node from the nodes_degree_class so it's edge wont get picked again 
+			if max_i in node_degree_class:
+				nodes_by_degree.append(max_i)
+				node_degree_class.remove(max_i)
+			elif max_j in node_degree_class:
+				nodes_by_degree.append(max_j)
+				node_degree_class.remove(max_j)
+	# print(nodes_by_degree)
 	return nodes_by_degree	
 	
 def clear_node_engagements(Graph):
@@ -55,15 +62,14 @@ def clear_node_engagements(Graph):
 def get_node_to_transfer_with(Graph, starting_node,num):
 	edges=list(Graph.edges(starting_node, data=True))
 	valid_edges=edges.copy()
-	print("all edges from node"+str(starting_node)+" "+str(edges))
-	print(len(edges))
+	# print("all edges from node"+str(starting_node)+" "+str(edges))
+	# print(len(edges))
 	for (i, j, attributes) in edges:
-		print(i,j)
 		if (attributes["completed"]==True):
 			valid_edges.remove( (i,j,Graph[i][j]) )
 		elif(Graph.nodes[j]["is_engaged"]==True):
 			valid_edges.remove( (i,j,Graph[i][j]) )
-	print("remaining edges"+str(edges))
+	# print("remaining edges"+str(edges))
 	max_val=0
 	max_node=-1
 	for i,j,attributes in valid_edges:
@@ -127,11 +133,11 @@ for i in range(get_max_degree_of_graph(G)):
 				G.nodes[node]["is_engaged"]=True	
 				G.nodes[destination_node]["remaining_degree"]-=1				
 				G.nodes[node]["remaining_degree"]-=1
-
+				print("edge completed round " + color_list[i] + " " + str(node) + " " + str(destination_node))
 				G[node][destination_node]["completed"]=True
 				G[node][destination_node]["color"]=color_list[i] 	
 				
-				print("completed", node, destination_node, G[node][destination_node])
+				# print("completed", node, destination_node, G[node][destination_node])
 
 	clear_node_engagements(G)
 
