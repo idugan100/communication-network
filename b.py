@@ -133,7 +133,7 @@ for i in range(get_max_degree_of_graph(G)):
 				G.nodes[node]["is_engaged"]=True	
 				G.nodes[destination_node]["remaining_degree"]-=1				
 				G.nodes[node]["remaining_degree"]-=1
-				print("edge completed round " + color_list[i] + " " + str(node) + " " + str(destination_node))
+				print("edge completed round " + color_list[i] + " " + str(node) + " " + str(destination_node) + " time taken: " + str(G[node][destination_node]["weight"]))
 				G[node][destination_node]["completed"]=True
 				G[node][destination_node]["color"]=color_list[i] 	
 				
@@ -152,6 +152,6 @@ pos=nx.spring_layout(G)
 nx.draw_networkx(G, pos, width=2, with_labels=True, min_source_margin=2,font_weight='bold', node_color='skyblue', edge_color=colors, node_size=400, font_size=10)
 edge_labels = nx.get_edge_attributes(G, 'weight')
 
-nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=6)
 plt.savefig("b.png")
 plt.show()
