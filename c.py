@@ -13,7 +13,7 @@ G.add_edges_from([
 			(10,9,{'weight':8.0, 'color':'green'}), (9,13,{'weight':5.0, 'color':'green'}), (9,8,{'weight':2.4, 'color':'orange'}), 
 			(8,14,{'weight':9.0, 'color':'green'}), (14,15,{'weight':3.2, 'color':'purple'}), (15,19,{'weight':2.1, 'color':'yellow'}), 
 			(15,16,{'weight':8.0, 'color':'green'}), (16,17,{'weight':4.5, 'color':'orange'}), (16,18,{'weight':3.6, 'color':'green'}), 
-			(14,20,{'weight':7.0, 'color':'green'}), (20,21,{'weight':7.0, 'color':'green'}), (21,22,{'weight':9.0, 'color':'orange'}),
+			(14,20,{'weight':7.0, 'color':'green'}), (20,21,{'weight':7.0, 'color':'orange'}), (21,22,{'weight':9.0, 'color':'green'}),
 			(21,23,{'weight':1.2, 'color':'purple'}), (20,24,{'weight':7.0, 'color':'purple'}), (24,25,{'weight':4.2, 'color':'yellow'}),
 			(24,26,{'weight':9.0, 'color':'green'}), (26,27,{'weight':4.4, 'color':'orange'}), (26,28,{'weight':5.0, 'color':'purple'}),
             
